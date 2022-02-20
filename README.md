@@ -41,10 +41,11 @@ The following commands are available (more commands can be added later):
 
 ## Milestones
 - [ ] Client front-end and inner workings.
-	- [ ] Big textfield for messages.
-	- [ ] Small textfield below that for entering messages.
-	- [ ] Button next to that for sending the message.
-	- [ ] Function to add messages to the textfield.
+	- [x] Big textfield for messages.
+	- [x] Small textfield below that for entering messages.
+	- [x] Button next to that for sending the message.
+	- [ ] Function to add a message to the textfield.
+	- [ ] Function to add a user to the online users list.
 - [ ] Send-only server
 	- [ ] Server can send messages to clients on port 6969, but can't receive any messages. Clients can receive the messages on port 6969 and add them to their message list.
 - [ ] Send-receive server

@@ -3,17 +3,82 @@ import wx
 class ClientLogin(wx.Dialog):
 
 	def __init__(self, parent, title):
-		pass
+		# Initialize superclass.
+		super(ClientLogin, self).__init__(parent, title=title, size=(250, 150))
+
+		# Create panel.
+		self.panel = wx.Panel(self)
+
+		# Get content sizer.
+		content_sizer = self.get_content_sizer()
+
+		# Add content sizer to global sizer.
+		global_sizer = wx.BoxSizer(wx.VERTICAL)
+		global_sizer.Add(content_sizer, proportion=0, flag=wx.EXPAND | wx.ALL, border=5)
+
+		# Set panel sizer.
+		self.panel.SetSizer(global_sizer)
+
+		# Bind connect button event.
+		self.Bind(wx.EVT_BUTTON, self.connect, self.connect_button)
+
+	def get_content_sizer(self):
+		# Create gridbagsizer.
+		content_sizer = wx.GridBagSizer(vgap=5, hgap=20)
+
+		# Create text labels for the left column.
+		username_text = wx.StaticText(self.panel, label="Username")
+		server_ip_text = wx.StaticText(self.panel, label="Server IP")
+
+		# Create text fields for the right column.
+		self.username_input = wx.TextCtrl(self.panel)
+		self.server_ip_input = wx.TextCtrl(self.panel)
+
+		# Create connect button.
+		self.connect_button = wx.Button(self.panel, label="Connect")
+
+		# Add components to gridbagsizer.
+		content_sizer.Add(username_text, pos=(0, 0), \
+			flag=wx.ALIGN_LEFT | wx.ALIGN_CENTER_VERTICAL)
+		content_sizer.Add(server_ip_text, pos=(1, 0), \
+			flag=wx.ALIGN_LEFT | wx.ALIGN_CENTER_VERTICAL)
+		content_sizer.Add(self.username_input, pos=(0, 1), \
+			flag=wx.ALIGN_RIGHT | wx.ALIGN_CENTER_VERTICAL)
+		content_sizer.Add(self.server_ip_input, pos=(1, 1), \
+			flag=wx.ALIGN_RIGHT | wx.ALIGN_CENTER_VERTICAL)
+		content_sizer.Add(self.connect_button, pos=(2, 0), span=(1, 2), \
+			flag=wx.CENTER)
+
+		# Return gridbagsizer.
+		return content_sizer
+
+	def connect(self, event):
+		"""
+		Called when clicking the connect button. Sets username and server_ip 
+		veriables and exits the dialog.
+		"""
+		# Set username and server_ip variables for calling object.
+		self.username = self.username_input.GetValue()
+		self.server_ip = self.server_ip_input.GetValue()
+		self.EndModal(10000)
 
 class ClientGUI(wx.Frame):
 
 	def __init__(self, parent, title):
 		# Initialize superclass.
-		wx.Frame.__init__(self, parent, title=title, size=(1280, 720))
+		super(ClientGUI, self).__init__(parent, title=title, size=(1280, 720))
 
+		# Initialize panel.
 		self.panel = wx.Panel(self)
+
+		# Get global sizer.
 		global_sizer = self.get_global_sizer()
+
+		# Set panel sizer to global sizer.
 		self.panel.SetSizer(global_sizer)
+
+		# Bind send button event.
+		self.Bind(wx.EVT_BUTTON, self.send_message_event, self.send_message_button)
 
 		# Center and show.
 		self.Center()
@@ -117,10 +182,35 @@ class ClientGUI(wx.Frame):
 		# Return sizer.
 		return chat_input_sizer
 
+	def add_message_to_chatbox(self, message):
+		"""
+		Adds the specified message to the big chatbox in the top right.
+		"""
+		self.chat_messages_textctrl.AppendText(message)
+
+	def add_user_to_online_users(self, user):
+		"""
+		Adds the specified user to the connected users listbox on the left.
+		"""
+		if user == "" or user in self.connected_users_listbox.GetStrings():
+			return
+		self.connected_users_listbox.Append(user)
+
+	def send_message_event(self, event):
+		"""
+		
+		"""
+		print("Hello")
+
 def main():
 	app = wx.App(False)
-	window = ClientGUI(None, "Chat Application")
-	app.MainLoop()
+	window = ClientLogin(None, "Connect")
+	return_value = window.ShowModal()
+	print(window.username)
+	print(window.server_ip)
+	window.Destroy()
+	#window = ClientGUI(None, "Chat Application")
+	#app.MainLoop()
 
 if __name__ == "__main__":
 	main()

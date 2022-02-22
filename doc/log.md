@@ -1,4 +1,20 @@
 # Log
+### 22-02-2022
+*18:09*: Start development.<br />
+*18:12*: Added test for duplicate users for the function `add_user_to_online_users()` in the class `ClientGUI`.<br />
+*18:27*: Add `connect()` function to class `ClientLogin`. This function should try to receive a first message from the server that says `ok` to make sure the server exists, is running and can accept new connections.
+*18:28*: Stop development.<br /><br />
+
+*19:38*: Start development.<br />
+
+
+### 21-02-2022
+*20:09*: Start development.<br />
+*20:20*: Added function `add_user_to_online_users()` with testing.<br />
+*20:59*: Started implementing the login dialog. The `wx.GridBagSizer` does not want to get centered so I'm going to leave it like this for now.<br />
+*21:03*: Added function `ClientLogin.get_content_sizer()` including testing.<br />
+*21:04*: Stop development.
+
 ### 20-02-2022
 *11:01*: Start development.<br />
 *11:01*: Created folder `test/`, which will hold all of our tests.<br />
@@ -31,6 +47,10 @@
 *21:12*: Start development.<br />
 *21:17*: Made chat message textfield `wx.TE_READONLY` and `wx.TE_MULTILINE`, text can be added by calling the function `AppendText(string)` on it.<br />
 *21:22*: Ticked the third submilestone of the first milestone about the client front-end.<br />
+*21:24*: Commit changes to branch `main`.<br />
+*20:30*: Create branch `client-backend`.<br />
+*21:49*: Added function `add_message_to_chatbox()` with testing and added function `send_message_event()` with no testing yet.<br />
+*21:50*: Stop development.
 
 ### 19-02-2022
 *20:12*: Start development.<br />
